@@ -62,3 +62,22 @@ document.getElementById('clear-btn').addEventListener('click', function(){
     const callHistoryContainer = document.getElementById('call-history-section')
     callHistoryContainer.innerHTML = '';
 });
+
+// COPY BUTTON AND COPY COUNT INCREASING FEATURE
+const copyButtons = document.querySelectorAll('.btn-copy')
+const copyCounterElement = document.querySelector('.copy-count')
+let copyCount = 0;
+
+for(const copyButton of copyButtons) {
+    copyButton.addEventListener('click', function() {
+        const card = copyButton.closest('.card')
+        const number = card.querySelector('.number').innerText
+
+        navigator.clipboard.writeText(number).then(() => {
+            alert(`${number} copied!`)
+
+            copyCount++;
+            copyCounterElement.innerText = copyCount;
+        })
+    })
+}
